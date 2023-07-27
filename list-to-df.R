@@ -1,12 +1,34 @@
 library(magrittr)
 
-# Create a deeply nested list
-obj1 <- list(town = "a", list(loc = c(1:10), elt = "foo"))
-obj2 <- list(town = "b", list(loc = c(2:20), elt = "bar"))
-obj3 <- list(town = "c", list(loc = c(3:30), elt = "baz"))
+# Create 3 nested lists of vectors with different lengths
+# Note: All lists do have the same items and names,
+# but lengths of the vectors differ between the lists as well.
+list_a <- list(
+    town = "a",
+    list(
+      loc = c(1:10),
+      elt = "foo"
+    )
+  )
+list_b <- list(
+    town = "b",
+    list(
+      loc = c(2:20),
+      elt = "bar"
+    )
+  )
+list_c <- list(
+    town = "c",
+    list(
+      loc = c(3:30),
+      elt = "bar"
+    )
+  )
 
-nested_list <- list(obj1, obj2, obj3)
+# Nest all three lists in a single list
+nested_list <- list(list_a, list_b, list_c)
 
+# Unbundle the entire list into a single, tidy tibble
 nested_list %>%
   purrr::map(
     .f = \(element){
